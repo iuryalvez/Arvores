@@ -35,28 +35,13 @@ void criarArvoreVazia_AVL(ArvAVL *arv);
 No *novoNo (int valor);
 
 /**
- * @brief função que insere valores na árvore AVL
+ * @brief função recursiva que insere elementos na árvore AVL
  * 
- * @param arv estrutura de árvore AVL
+ * @param *no nó raiz da árvore
  * @param valor valor a ser inserido
+ * @return No*, o nó alocado e balanceado (recursivo)
  */
-void inserir_AVL(ArvAVL *arv, int valor);
-
-/**
- * @brief função complementar para inserir à esquerda
- * 
- * @param no estrura de nó
- * @param valor valor a ser inserido
- */
-void inserirEsq(No *no, int valor);
-
-/**
- * @brief função complementar para inserir à direita
- * 
- * @param no estrutura de nó
- * @param valor valor a ser inserido
- */
-void inserirDir(No *no, int valor);
+No *inserir_AVL(No *raiz, int valor);
 
 // função que retorna o maior valor entre a e b;
 short maior (short a, short b);
@@ -75,7 +60,7 @@ short alturaNo(No *no);
  * @param no nó que vai ser rotacionado
  * @return short, positivo ou negativo
  */
-short balanceamento(No *no);
+short fatorDeBalanceamento_AVL(No *no);
 
 /**
  * @brief função que imprime os itens da árvore de forma pré-fixada
@@ -97,6 +82,14 @@ void imprimirInfix_AVL(No *raiz);
  * @param raiz raiz da árvore AVL
  */
 void imprimirPostfix_AVL(No *raiz);
+
+/**
+ * @brief função que faz o balanceamento da árvore AVL a medida que inserimos nós
+ * 
+ * @param no nó a ser balanceado
+ * @return No* nó balanceado
+ */
+No *balancear_AVL(No *no);
 
 /**
  * @brief função que rotaciona a árvore à esquerda

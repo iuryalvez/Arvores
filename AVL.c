@@ -25,39 +25,22 @@ No *novoNo (int valor) {
         printf("Elemento inserido com sucesso!\n");
     }
     else printf("Erro ao alocar memória para um novo nó\n");
-    return novo;
+    return novo; // retornando nó alocado
 }
 
-void inserir_AVL(ArvAVL *arv, int valor) {
-    if (!arv->raiz) arv->raiz = novoNo(valor);
+No *inserir_AVL(No *raiz, int valor) {
+    if (!raiz) raiz = novoNo(valor);
     else { // inserindo ordenadamente
-        if (valor < arv->raiz->valor) inserirEsq(arv->raiz, valor);
-        else if (valor > arv->raiz->valor) inserirDir(arv->raiz, valor);
+        if (valor < raiz->valor) raiz->esq = inserir_AVL(raiz, valor);
+        else if (valor > raiz->valor) raiz->dir = inserir_AVL(raiz, valor);
         else {
             printf("Elemento já está na arvore.\n");
             return;
         }
-    }  
-}
-
-void inserirEsq(No *no, int valor) {
-    No *novo;
-    if (!no->esq) novo = novoNo(valor);
-    else {
-        if (valor < no->esq->valor) inserirEsq(no->esq, valor);
-        else if (valor > no->dir->valor) inserirDir(no->esq, valor);
-        else printf("Elemento já está na arvore.\n");
     }
-}
-
-void inserirDir(No *no, int valor) {
-    No *novo;
-    if (!no->dir) novo = novoNo(valor);
-    else {
-        if (valor > no->dir->valor) inserirDir(no->dir, valor);
-        else if (valor < no->dir->valor) inserirEsq(no->dir, valor);
-        else printf("Elemento já está na árvore!\n");
-    }
+    raiz->altura = maior(alturaNo(raiz->esq),alturaNo(raiz->dir) + 1);  
+    raiz = balancear_AVL(raiz);
+    return raiz;
 }
 
 short maior(short a, short b) {
@@ -69,9 +52,25 @@ short alturaNo(No *no) {
     else return no->altura;
 }
 
-short balanceamento(No *no) {
+short fatorDeBalanceamento_AVL(No *no) {
     if (no) return (alturaNo(no->esq) - alturaNo(no->dir));
     else return 0;
+}
+
+No *balancear_AVL(No *no) {
+    if (fatorDeBalanceamento_AVL(no) < -1) { // rotações do lado direito
+        // verificando se há necessidade de rotação dupla, se o da esquerda estiver desbalanceado
+        if (fatorDeBalanceamento_AVL(no->dir) >= 1) rotacaoDuplaDE_AVL(no);
+        // se a árvore estiver completamente desbalanceada à direita fb < -1 e fb do direito <= 0
+        else rotacaoEsquerda_AVL(no);
+    }
+    else if (fatorDeBalanceamento_AVL(no) > 1) { // rotações do lado esquerdo
+        // verificando se há necessidade de rotação dupla do lado esquerdo
+        if (fatorDeBalanceamento_AVL(no) <= -1) rotacaoDuplaED_AVL(no);
+        // se estiver completamente desbalanceada á esquerda, ou seja fb > 1 e fb do esquerdo >= 0
+        else rotacaoDireita_AVL(no);
+    }
+    return no;
 }
 
 No *rotacaoEsquerda_AVL(No *r) {
