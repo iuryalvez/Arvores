@@ -8,6 +8,7 @@
 typedef struct no {
     int valor;
     struct no *esq, *dir;
+    int tam;
     short altura;
 } No;
 
@@ -63,25 +64,33 @@ short alturaNo(No *no);
 short fatorDeBalanceamento_AVL(No *no);
 
 /**
+ * @brief função que imprime a representação visual da árvore
+ * 
+ * @param raiz nó raiz
+ * @param nivel camada em que se encontra o valor
+ */
+void imprimirRepresentacao_ARV(No *raiz, int nivel);
+
+/**
  * @brief função que imprime os itens da árvore de forma pré-fixada
  * 
  * @param raiz raiz da árvore AVL
  */
-void imprimirPrefix_AVL(No *raiz);
+void imprimirPrefix_ARV(No *raiz);
 
 /**
  * @brief função que imprime os itens da árvore de forma meio-fixada
  * 
  * @param raiz raiz da árvore AVL
  */
-void imprimirInfix_AVL(No *raiz);
+void imprimirInfix_ARV(No *raiz);
 
 /**
  * @brief função que imprime os itens da árvore de forma pós-fixada
  * 
  * @param raiz raiz da árvore AVL
  */
-void imprimirPostfix_AVL(No *raiz);
+void imprimirPostfix_ARV(No *raiz);
 
 /**
  * @brief função que faz o balanceamento da árvore AVL a medida que inserimos nós
@@ -130,7 +139,7 @@ No *rotacaoDuplaED_AVL(No *r);
  * @param valor valor a ser buscado
  * @return int 
  */
-int buscar_AVL(No * raiz, int valor);
+int buscar_ARV(No * raiz, int valor);
 
 /**
  * @brief função que retorna o tamanho da árvore (recursivo)
@@ -138,7 +147,7 @@ int buscar_AVL(No * raiz, int valor);
  * @param raiz raiz da árvore
  * @return int, o tamanho
  */
-int tamanho_AVL(No *raiz);
+int tamanho_ARV(No *raiz);
 
 /**
  * @brief função que remove um nó da árvore
@@ -154,7 +163,7 @@ No *remover_AVL(No *raiz, int valor);
  * 
  * @param raiz raiz da árvore
  */
-void liberarArvore_AVL(No *raiz);
+void liberarArvore_ARV(No *raiz);
 
 // função que dá "cls" na tela do terminal
 void clear_screen();
