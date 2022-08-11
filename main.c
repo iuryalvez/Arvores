@@ -10,9 +10,7 @@ int main () {
     int op; // operador
     int opc = FALSE; // opção
     int valor;
-    ArvAVL *arv; // árvore AVL
-    criarArvoreVazia_AVL(arv);
-    No *aux; // nó auxiliar
+    ArvAVL *arv = criarArvoreVazia_AVL();
     clear_screen(); // limpando terminal
     
     do {
@@ -83,6 +81,7 @@ int main () {
                 break;
         }
     } while (op != 0);
-    liberarArvore_ARV(arv->raiz);
+    liberarNos_ARV(arv->raiz);
+    liberarArvore_ARV(arv);
     return 0;
 }

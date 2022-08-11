@@ -23,9 +23,9 @@ void menu();
 /**
  * @brief função que cria árvore vazia (arv->raiz = NULL)
  * 
- * @param arv estrutura da árvore AVL
+ * @return Árvore alocada
  */
-void criarArvoreVazia_AVL(ArvAVL *arv);
+ArvAVL *criarArvoreVazia_AVL();
 
 /**
  * @brief função que cria um novo nó
@@ -163,7 +163,9 @@ No *remover_AVL(No *raiz, int valor);
  * 
  * @param raiz raiz da árvore
  */
-void liberarArvore_ARV(No *raiz);
+void liberarNos_ARV(No *raiz);
+
+void liberarArvore_ARV(ArvAVL *arv);
 
 // função que dá "cls" na tela do terminal
 void clear_screen();

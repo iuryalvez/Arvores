@@ -12,12 +12,15 @@ void menu() {
     printf("\n");
 }
 
-void criarArvoreVazia_AVL(ArvAVL *arv) {
+ArvAVL *criarArvoreVazia_AVL() {
+    ArvAVL *arv = NULL;
+    arv = (ArvAVL *) malloc(sizeof(ArvAVL));
     arv->raiz = NULL;
+    return arv;
 }
 
 No *novoNo (int valor) {
-    No *novo;
+    No *novo = NULL;
     novo = (No *) malloc(sizeof(No));
     if (novo) {
         novo->valor = valor;
@@ -42,7 +45,7 @@ No *inserir_AVL(No *raiz, int valor) {
     }
     raiz->altura = maior(alturaNo(raiz->esq),alturaNo(raiz->dir)) + 1;  
     raiz = balancear_AVL(raiz);
-    return raiz; // nova raiz se tiver sido balanceada
+    return raiz; // nova raiz
 }
 
 short maior(short a, short b) {
@@ -60,13 +63,13 @@ short fatorDeBalanceamento_AVL(No *no) {
 }
 
 No *balancear_AVL(No *no) {
-    if (fatorDeBalanceamento_AVL(no) < -1) { // rotações do lado direito
+    if (fatorDeBalanceamento_AVL(no) <= -2) { // rotações do lado direito
         // verificando se há necessidade de rotação dupla, se o da esquerda estiver desbalanceado
         if (fatorDeBalanceamento_AVL(no->dir) >= 1) no = rotacaoDuplaDE_AVL(no);
         // se a árvore estiver completamente desbalanceada à direita fb < -1 e fb do direito <= 0
         else no = rotacaoEsquerda_AVL(no);
     }
-    else if (fatorDeBalanceamento_AVL(no) > 1) { // rotações do lado esquerdo
+    else if (fatorDeBalanceamento_AVL(no) >= 2) { // rotações do lado esquerdo
         // verificando se há necessidade de rotação dupla do lado esquerdo
         if (fatorDeBalanceamento_AVL(no) <= -1) no = rotacaoDuplaED_AVL(no);
         // se estiver completamente desbalanceada á esquerda, ou seja fb > 1 e fb do esquerdo >= 0
@@ -76,7 +79,7 @@ No *balancear_AVL(No *no) {
 }
 
 No *rotacaoEsquerda_AVL(No *r) {
-    No *y, *f;
+    No *y = NULL, *f = NULL;
     y = r->dir;
     f = y->esq;
 
@@ -90,7 +93,7 @@ No *rotacaoEsquerda_AVL(No *r) {
 }
 
 No *rotacaoDireita_AVL(No *r) {
-    No *y, *f;
+    No *y = NULL, *f = NULL;
     y = r->esq;
     f = y->dir;
 
@@ -209,12 +212,16 @@ No *remover_AVL(No *raiz, int valor) {
     return raiz; // nova raiz
 }
 
-void liberarArvore_ARV(No *raiz) {
+void liberarNos_ARV(No *raiz) {
     if (raiz != NULL) {
-        liberarArvore_ARV(raiz->esq);
-        liberarArvore_ARV(raiz->dir);
+        liberarNos_ARV(raiz->esq);
+        liberarNos_ARV(raiz->dir);
         free(raiz);
     }
+}
+
+void liberarArvore_ARV(ArvAVL *arv) {
+    free(arv);
 }
 
 void clear_screen() {
