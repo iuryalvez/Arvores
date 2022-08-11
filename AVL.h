@@ -165,6 +165,7 @@ No *remover_AVL(No *raiz, int valor);
  */
 void liberarNos_ARV(No *raiz);
 
+// função que libera a árvore passada por referência
 void liberarArvore_ARV(ArvAVL *arv);
 
 // função que dá "cls" na tela do terminal

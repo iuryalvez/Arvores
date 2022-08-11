@@ -10,6 +10,8 @@ int main () {
     int op; // operador
     int opc = FALSE; // opção
     int valor;
+    int i; // variável auxiliar
+    int qtd; // quantidade
     ArvAVL *arv = criarArvoreVazia_AVL();
     clear_screen(); // limpando terminal
     
@@ -17,13 +19,26 @@ int main () {
         menu();
         scanf("%d", &op);
         opc = FALSE;
+        qtd = FALSE;
         printf("\n");
         switch (op) {
             case 1:
                 printf("INSERÇÃO\n");
-                printf("Valor a ser inserido: ");
-                scanf("%d", &valor);
-                arv->raiz = inserir_AVL(arv->raiz, valor);
+                // printf("Valor a ser inserido: ");
+                while (qtd <= 0) {
+                    printf("Quantidade de elementos a serem inseridos: ");
+                    scanf("%d", &qtd);
+                    if (qtd <= 0) printf("Quantidade inválida!\n");
+                }
+                for(i = 1; i <= qtd; i++) {
+                    printf("%dº valor: ", i);
+                    scanf("%d", &valor);
+                    if (buscar_ARV(arv->raiz,valor) == FALSE) arv->raiz = inserir_AVL(arv->raiz,valor); // se o valor não estiver na árvore, posso inserir
+                    else {
+                        printf("O elemento já está na árvore!\nInsira outro valor!\n");
+                        i--;
+                    }
+                }
                 printf("\n");
                 break;
             case 2:
