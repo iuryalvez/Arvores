@@ -1,12 +1,13 @@
 #include "AVL.h"
 
 void menu() {
-    printf("ÁRVORE AVL\n");
+    printf("ARVORE AVL\n");
     printf("1  ->  INSERIR ELEMENTOS\n");
     printf("2  ->  IMPRIMIR ELEMENTOS\n");    
-    printf("3  ->  TAMANHO DA ÁRVORE\n");    
-    printf("4  ->  BUSCAR ELEMENTO\n");
-    printf("5  ->  REMOVER ELEMENTOS\n");
+    printf("3  ->  TAMANHO DA ARVORE\n");    
+    printf("4  ->  ALTURA DA ARVORE\n");
+    printf("5  ->  BUSCAR ELEMENTO\n");
+    printf("6  ->  REMOVER ELEMENTO\n");
     printf("99 ->  CLEAR/CLS\n");
     printf("0  ->  SAIR\n");
     printf("\n");
@@ -29,7 +30,7 @@ No *novoNo (int valor) {
         novo->altura = 0;
         printf("Elemento inserido com sucesso!\n");
     }
-    else printf("Erro ao alocar memória para um novo nó\n");
+    else printf("Erro ao alocar memoria para um novo no\n");
     return novo; // retornando nó alocado
 }
 
@@ -39,7 +40,7 @@ No *inserir_AVL(No *raiz, int valor) {
         if (valor < raiz->valor) raiz->esq = inserir_AVL(raiz->esq, valor);
         else if (valor > raiz->valor) raiz->dir = inserir_AVL(raiz->dir, valor);
         else {
-            printf("Elemento já está na arvore.\n");
+            printf("Elemento ja esta na arvore.\n");
             return NULL;
         }
     }
@@ -183,7 +184,7 @@ int tamanho_ARV(No *raiz) {
 No *remover_AVL(No *raiz, int valor) {
     No *aux = NULL;
     if (raiz == NULL) { // se a raiz da árvore é vazia ou se não encontrar o valor.
-        printf("Valor não encontrado!\n");
+        printf("Valor nao encontrado!\n");
         return NULL; // não removeu nada
     }
     else {
