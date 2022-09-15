@@ -1,5 +1,0 @@
-Copiar e colar no terminal aberto na pasta:
-
-gcc -c AVL.c -o AVL.o
-gcc AVL.o main.c -o AVL.exe
-./AVL.exe
