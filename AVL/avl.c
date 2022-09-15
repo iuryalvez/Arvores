@@ -1,4 +1,4 @@
-#include "AVL.h"
+#include "avl.h"
 
 void menu() {
     printf("ARVORE AVL\n");

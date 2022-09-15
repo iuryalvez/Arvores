@@ -1,4 +1,4 @@
-#include "AVL.h"
+#include "avl.h"
 
 /*
 gcc -c AVL.c -o AVL.o
